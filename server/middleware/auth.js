@@ -3,15 +3,16 @@ import jwt from "jsonwebtoken";
 // click the like button => auth middleware (next) => like controlle
 const auth = (req, res, next) => {
     try {
+        console.log(req.headers);
         const token = req.headers.authorization.split(" ")[1];
-        const isCustonAuth = token.lenght < 500;
+        const isCustomAuth = token.length < 500;
 
         let decodedData;
 
-        if(token && isCustonAuth) {
+        if(token && isCustomAuth) {
             decodedData = jwt.verify(token, 'test');
 
-            req.userId = decodedData?.indexOf;
+            req.userId = decodedData?.id;
         } else {
             decodedData = jwt.decode(token);
 
